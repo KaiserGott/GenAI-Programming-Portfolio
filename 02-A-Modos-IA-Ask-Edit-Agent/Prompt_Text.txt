@@ -1,0 +1,42 @@
+PROMPT PARA EL MODO AGENT
+Contexto del Proyecto: Actúa como un Desarrollador Senior Fullstack. Quiero construir una aplicación web de Turnera Médica utilizando una arquitectura de 3 capas (Frontend, API/Lógica, Acceso a Datos).
+1. Qué construir: Una aplicación web completa de gestión de turnos médicos que relacione Pacientes con Turnos.
+2. Para qué sirve: El objetivo es permitir que un centro médico registre pacientes y les asigne turnos en una agenda persistente.
+3. Funcionalidades:
+Gestión de Pacientes: Formulario para registrar pacientes (Nombre, Apellido, DNI, Teléfono).
+Gestión de Turnos: Formulario para sacar un turno eligiendo un paciente ya registrado, Fecha, Hora y Especialidad.
+Visualización: Una tabla con el listado de todos los turnos programados, ordenados por fecha y hora de forma ascendente.
+4. Reglas de negocio:
+Todos los campos son obligatorios.
+El DNI debe ser numérico.
+No se pueden sacar turnos en fechas pasadas.
+Los pacientes deben estar registrados previamente para poder asignarles un turno.
+5. Organización Técnica (Arquitectura):
+Capa 1 (Frontend): Interfaz de usuario limpia y responsiva.
+Capa 2 (API/Backend): Rutas de Express para manejar el CRUD de pacientes y turnos.
+Capa 3 (Acceso a Datos): Uso de un ORM o Driver para persistir la información. Separar la lógica de conexión de la lógica de las rutas.
+6. Tecnologías a usar (Estrictas):
+Frontend: Bootstrap 5 (vía CDN) y JavaScript Vanilla (ES6+).
+Backend: Node.js con el framework Express.
+Base de Datos: H2 Database (debes configurar la conexión mediante un driver compatible con Node.js como jdbc-h2 o similar, o en su defecto explicar la configuración del puente Java).
+Persistencia: Los datos deben guardarse en un archivo físico, no solo en memoria.
+7. Interfaz de Usuario:
+Menú de navegación superior con 3 opciones: "Inicio", "Registrar Paciente", "Agenda de Turnos".
+Uso de Modales de Bootstrap para los formularios de carga si es posible.
+Diseño limpio y profesional (estética médica).
+8. Entrega esperada:
+Estructura completa de carpetas del proyecto.
+Archivo package.json con todas las dependencias necesarias.
+Scripts de inicialización de la base de datos H2 (Tablas Pacientes y Turnos).
+Código fuente completo comentado.
+Un archivo README.md con las instrucciones exactas de cómo instalar y ejecutar la app (incluyendo requisitos de Java para H2).
+9. Criterios de Aceptación (Validación):
+La app permite registrar un paciente y que este aparezca en el selector de turnos.
+Los turnos se guardan y persisten aunque se reinicie el servidor de Node.js.
+La lista de turnos se muestra ordenada cronológicamente.
+La arquitectura separa claramente los archivos de rutas de los de conexión a la base de datos.
+10. Ejecución y Validación Final:
+Una vez que hayas creado toda la estructura de archivos y configurado las dependencias, debes ejecutar la aplicación.
+Asegúrate de instalar todas las dependencias necesarias mediante npm install.
+Inicia el servidor (por ejemplo, con node src/server.js o npm start).
+Confirma que el servidor está corriendo y especifica en qué puerto (ej. http://localhost:3000) para que pueda abrirlo en el navegador y mostrar la funcionalidad.
