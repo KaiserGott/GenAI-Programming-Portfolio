@@ -1,0 +1,6 @@
+Nombres Descriptivos: Cambia nombres como calc, pr, f y variables como lst, t, mn por términos claros y profesionales.
+Eliminación de Redundancia: El código calcula los mismos valores varias veces. Utiliza las funciones ya definidas dentro de la función principal process para evitar repetir bucles for.
+Optimización con Python: Utiliza funciones nativas de Python (como sum(), min(), max()) para reducir la cantidad de líneas y mejorar la eficiencia.
+Modularización: Asegúrate de que cada función tenga una sola responsabilidad.
+Simplificación Condicional: Reestructura los bloques if-else anidados (la lógica de Caso A, B, C, etc.) utilizando "cláusulas de guarda" o una estructura más plana y legible para evitar el "código espagueti".
+Documentación: Al principio del archivo, genera un bloque de comentarios detallando todos los cambios específicos realizados (qué se mejoró, qué se eliminó y por qué).
