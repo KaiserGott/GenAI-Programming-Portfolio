@@ -1,0 +1,12 @@
+{
+	"servers": {
+		"my-mcp-server-sumar": {
+			"type": "stdio",
+			"command": "C:\\Python314\\python.exe",
+			"args": [
+				"D:\\Sebastian - HP\\UP - Licenciatura en Tecnologia\\2026-4°-1° Cuatrimestre 2026 - Electivas\\02E-Programacion Con IA Generativa - Jueves\\GenAI-Programming-Portfolio\\05-A-MCP-Server-Dev\\servidor_mcp_sumar.py"
+			]
+		}
+	},
+	"inputs": []
+}
