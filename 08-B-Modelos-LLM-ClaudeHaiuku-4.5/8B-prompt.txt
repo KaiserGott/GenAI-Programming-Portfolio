@@ -1,0 +1,4 @@
+Actúa como un desarrollador Frontend experto. Te adjunto una captura de pantalla con el diseño de una interfaz/app en Figma. Tu tarea es analizar detalladamente los componentes visuales, la disposición de los elementos, la paleta de colores y la tipografía para transcribir este diseño a código utilizable.
+Generá una aplicación pequeña y funcional (Single Page Application) utilizando HTML estructurado, estilos modernos con CSS (podés usar Tailwind CSS embebido) y la lógica mínima necesaria en JavaScript para que los botones simulen interacción.
+Entregá un único archivo limpio, modular y completamente responsivo. Necesito que utilices la carpeta en la que estoy para poner los archivos que consideres necesarios.
+Correlo al final.

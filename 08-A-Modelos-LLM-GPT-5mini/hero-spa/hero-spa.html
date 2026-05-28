@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Innovate Without Limits — Demo</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            neon: '#7c3aed',
+            neon2: '#06b6d4',
+            accent: '#8b5cf6'
+          },
+          fontFamily: {
+            sans: ['Poppins', 'ui-sans-serif', 'system-ui']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html,body{height:100%}
+    body{font-family: Poppins, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;}
+    /* Background neon blur shapes to emulate the Figma artboard */
+    .bg-hero{position:relative;overflow:hidden}
+    .bg-hero::before,.bg-hero::after{content:'';position:absolute;inset:0;z-index:0}
+    .bg-hero::before{background: radial-gradient( circle at 10% 20%, rgba(124,58,237,0.25), transparent 12%), radial-gradient(circle at 85% 20%, rgba(6,182,212,0.18), transparent 12%);filter:blur(40px);transform:scale(1.1);}
+    .bg-hero::after{background: linear-gradient(180deg, rgba(6,6,23,0.45), rgba(6,6,23,0.6));mix-blend-mode:overlay}
+    .glass{background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));backdrop-filter: blur(8px);-webkit-backdrop-filter: blur(8px);border: 1px solid rgba(255,255,255,0.06)}
+    /* Floating badges */
+    .badge{background:rgba(255,255,255,0.04);padding:.35rem .7rem;border-radius:9999px;border:1px solid rgba(255,255,255,0.06);display:inline-flex;align-items:center;gap:.5rem}
+    /* small utilities */
+    .neon-text{background:linear-gradient(90deg,#fff 0%, #d6e4ff 40%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    /* Responsive tweaks */
+    @media (max-width:768px){
+      .desktop-stats{display:none}
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-slate-100 antialiased">
+  <div class="min-h-screen bg-hero" id="app">
+    <!-- NAV -->
+    <header class="relative z-20">
+      <nav class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
+        <div class="flex items-center gap-8">
+          <ul class="hidden md:flex items-center gap-6 text-sm text-slate-200/80">
+            <li><a href="#" class="hover:text-white">Home</a></li>
+            <li><a href="#" class="hover:text-white">Service</a></li>
+            <li><a href="#" class="hover:text-white">Feature</a></li>
+            <li><a href="#" class="hover:text-white">Contact</a></li>
+          </ul>
+          <div class="text-white font-semibold tracking-wider">NEXVISI</div>
+        </div>
+        <div class="flex items-center gap-4">
+          <select id="lang" class="hidden md:block bg-transparent border border-white/5 text-slate-200 px-3 py-1 rounded">
+            <option>EN</option>
+            <option>ES</option>
+          </select>
+          <button id="contactBtn" class="ml-2 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-neon to-neon2 text-white shadow-lg hover:scale-105 transform transition">Contact Us</button>
+          <button id="menuBtn" class="md:hidden p-2 bg-white/5 rounded"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white/80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- HERO CONTENT -->
+    <main class="relative z-10">
+      <div class="max-w-7xl mx-auto px-6 py-12 lg:py-20 flex flex-col lg:flex-row items-center gap-12">
+        <!-- Left column -->
+        <section class="w-full lg:w-7/12">
+          <div class="flex flex-col gap-6">
+            <div class="flex gap-3 items-center">
+              <span class="badge text-xs text-white/90">Insight Beyond</span>
+              <span class="badge text-xs text-white/90">Intelligence</span>
+              <span class="badge text-xs text-white/90">Secure AI</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+              <span class="block">Innovate</span>
+              <span class="block text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-sky-100">Without Limits</span>
+            </h1>
+
+            <p class="text-slate-300 max-w-xl">Soluciones de IA modernas que impulsan la transformación digital de marcas líderes. Diseño, estrategia y tecnología en una experiencia integrada.</p>
+
+            <div class="flex items-center gap-4">
+              <button id="getStarted" class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-gradient-to-r from-neon to-neon2 text-white shadow-2xl hover:brightness-105 transition">
+                <span>Get Started</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+              <button id="playBtn" class="p-3 rounded-full bg-white/5 hover:bg-white/8 transition shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3v18l15-9L5 3z" /></svg>
+              </button>
+            </div>
+
+            <div class="mt-8 flex items-center gap-8 desktop-stats">
+              <div>
+                <div class="text-2xl font-bold" id="stat1">0</div>
+                <div class="text-sm text-slate-400">320M+ Business</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold" id="stat2">0</div>
+                <div class="text-sm text-slate-400">590K+ Happy Client</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Right column (visual + card) -->
+        <aside class="w-full lg:w-5/12 flex flex-col items-center lg:items-end gap-6">
+          <div class="relative w-full max-w-md">
+            <div class="h-72 sm:h-96 rounded-2xl bg-gradient-to-br from-[#070617] via-[#0b0720] to-[#0b0a14] overflow-hidden glass border border-white/5 shadow-2xl">
+              <!-- Mock hero visual (neon grid + robot silhouette) -->
+              <div class="absolute inset-0" style="background-image: radial-gradient(ellipse at 20% 10%, rgba(124,58,237,0.08), transparent 10%), url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\'><defs><linearGradient id=\'g1\' x1=\'0%\' x2=\'100%\'><stop offset=\'0%\' stop-color=\'%237c3aed\' stop-opacity=\'0.15\'/><stop offset=\'100%\' stop-color=\'%2306b6d4\' stop-opacity=\'0.06\'/></linearGradient></defs><rect width=\'100%\' height=\'100%\' fill=\'url(%23g1)\'/></svg>'); background-size:cover; background-position:center; mix-blend-mode:screen"></div>
+            </div>
+
+            <!-- Floating right card -->
+            <div class="absolute -bottom-8 right-0 w-64 p-4 glass rounded-xl shadow-lg transform translate-y-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-xs text-slate-400">Profit</div>
+                  <div class="text-xl font-bold">68.5%</div>
+                </div>
+                <div id="radial" class="w-16 h-16"></div>
+              </div>
+              <div class="mt-3 text-sm text-slate-300">BRAND'S DIGITAL IDENTITY</div>
+              <a href="#" class="mt-2 inline-block text-indigo-300 text-sm">Explore more →</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <!-- Footer small -->
+    <footer class="relative z-10">
+      <div class="max-w-7xl mx-auto px-6 py-6 text-center text-slate-500 text-sm">© 2026 Nexvisi · Demo UI</div>
+    </footer>
+  </div>
+
+  <!-- Contact modal -->
+  <div id="modal" class="fixed inset-0 z-40 hidden items-center justify-center bg-black/50">
+    <div class="bg-white/5 glass p-6 rounded-xl max-w-md w-full">
+      <h3 class="text-lg font-semibold">Contact Us</h3>
+      <p class="mt-2 text-slate-300 text-sm">Simulación de formulario: este botón solo demuestra interacción.</p>
+      <div class="mt-4 flex justify-end">
+        <button id="closeModal" class="px-4 py-2 rounded bg-white/6">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simple interactions: counters, modal, play animation, radial svg
+    document.addEventListener('DOMContentLoaded', ()=>{
+      // Animated counters
+      const stat1 = document.getElementById('stat1');
+      const stat2 = document.getElementById('stat2');
+      animateNumber(stat1, 320, 1200, 'M+');
+      animateNumber(stat2, 590, 1200, 'K+');
+
+      // Modal
+      const modal = document.getElementById('modal');
+      document.getElementById('contactBtn').addEventListener('click', ()=>{ modal.classList.remove('hidden'); modal.classList.add('flex'); });
+      document.getElementById('closeModal').addEventListener('click', ()=>{ modal.classList.add('hidden'); modal.classList.remove('flex'); });
+
+      // Play button tiny animation
+      const playBtn = document.getElementById('playBtn');
+      playBtn.addEventListener('click', ()=>{
+        playBtn.classList.add('animate-ping');
+        setTimeout(()=>playBtn.classList.remove('animate-ping'), 600);
+        toast('Reproduciendo demo...');
+      });
+
+      // Get started
+      document.getElementById('getStarted').addEventListener('click', ()=>{ toast('Get Started — Acción simulada'); });
+
+      // Radial progress
+      const radial = document.getElementById('radial');
+      radial.innerHTML = radialSVG(68.5, 64);
+    });
+
+    function animateNumber(el, to, duration=1500, suffix=''){
+      const start = 0; const range = to - start; const startTime = performance.now();
+      function step(now){
+        const progress = Math.min((now - startTime) / duration, 1);
+        const value = Math.floor(progress * range + start);
+        el.textContent = value + suffix;
+        if(progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    function toast(message){
+      const t = document.createElement('div');
+      t.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-white/6 text-white px-4 py-2 rounded';
+      t.textContent = message;
+      document.body.appendChild(t);
+      setTimeout(()=>{ t.remove(); }, 1500);
+    }
+
+    function radialSVG(percent, size=64){
+      const stroke = 6; const r = (size - stroke) / 2; const c = 2 * Math.PI * r; const offset = c * (1 - percent/100);
+      return `
+        <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g2" x1="0%" x2="100%"><stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient>
+          </defs>
+          <g transform="rotate(-90 ${size/2} ${size/2})">
+            <circle cx="${size/2}" cy="${size/2}" r="${r}" stroke="rgba(255,255,255,0.06)" stroke-width="${stroke}" fill="none" />
+            <circle cx="${size/2}" cy="${size/2}" r="${r}" stroke="url(#g2)" stroke-width="${stroke}" stroke-dasharray="${c}" stroke-dashoffset="${offset}" stroke-linecap="round" fill="none" />
+          </g>
+        </svg>
+      `;
+    }
+  </script>
+</body>
+</html>

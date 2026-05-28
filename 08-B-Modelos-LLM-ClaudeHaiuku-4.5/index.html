@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXVIM - Innovate Without Limits</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fondo animado con partículas */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(236, 72, 153, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background: rgba(168, 85, 247, 0.2);
+            color: #a855f7;
+            border: 1px solid #a855f7;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(168, 85, 247, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.6;
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: rgba(168, 85, 247, 0.3);
+            top: -100px;
+            right: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 200px;
+            height: 200px;
+            background: rgba(59, 130, 246, 0.2);
+            bottom: 10%;
+            left: 5%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: rgba(236, 72, 153, 0.15);
+            top: 50%;
+            right: 5%;
+            animation: float 7s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            background: rgba(168, 85, 247, 0.1);
+            border-color: #a855f7;
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #a855f7;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #b4a0ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .navbar {
+            background: rgba(15, 12, 41, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-item {
+            color: #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            color: #a855f7;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #a855f7;
+            transition: width 0.3s ease;
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        .hero-title {
+            font-size: clamp(32px, 8vw, 72px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+            color: #22d3ee;
+            margin-bottom: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(30, 20, 60, 0.95);
+            min-width: 150px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            padding: 12px 0;
+            z-index: 1;
+            border-radius: 8px;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+        }
+
+        .dropdown-content a {
+            color: #e0e0e0;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(168, 85, 247, 0.2);
+            color: #a855f7;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(168, 85, 247, 0.9);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+            animation: slideIn 0.3s ease;
+            z-index: 1000;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
+        .notification.hide {
+            animation: slideOut 0.3s ease forwards;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .stat-card {
+                padding: 15px;
+            }
+
+            .stat-number {
+                font-size: 22px;
+            }
+
+            .orb-1, .orb-2, .orb-3 {
+                opacity: 0.3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Orbes de fondo -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <span class="text-2xl font-bold glow-text">NEXVIM</span>
+                </div>
+
+                <!-- Nav Items (Desktop) -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <span class="nav-item" onclick="scrollToSection('home')">Home</span>
+                    <span class="nav-item" onclick="scrollToSection('service')">Service</span>
+                    <span class="nav-item" onclick="scrollToSection('feature')">Feature</span>
+                    <span class="nav-item" onclick="scrollToSection('contact')">Contact</span>
+                </div>
+
+                <!-- Right side items -->
+                <div class="flex items-center space-x-4">
+                    <div class="dropdown hidden sm:block">
+                        <button class="nav-item flex items-center space-x-1">
+                            <span>EN</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                        </button>
+                        <div class="dropdown-content">
+                            <a onclick="changeLanguage('EN')">English</a>
+                            <a onclick="changeLanguage('ES')">Español</a>
+                            <a onclick="changeLanguage('FR')">Français</a>
+                        </div>
+                    </div>
+
+                    <button class="btn-primary" onclick="showNotification('Abriendo formulario de contacto...')">Contact Us</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="relative z-10">
+                    <div class="mb-6 inline-block glass-dark px-4 py-2 rounded-full">
+                        <span class="text-sm text-cyan-300 flex items-center space-x-2">
+                            <span>🚀</span>
+                            <span>Insight Beyond Intelligence</span>
+                        </span>
+                    </div>
+
+                    <h1 class="hero-title">Innovate Without Limits</h1>
+
+                    <p class="text-gray-300 text-lg mb-8 max-w-md">
+                        Desbloquea el poder de la IA generativa con tecnología de última generación y soluciones personalizadas para tu negocio.
+                    </p>
+
+                    <!-- Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                        <button class="btn-primary flex items-center justify-center space-x-2" onclick="showNotification('¡Iniciando experiencia!')">
+                            <span>Get Started</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                        <button class="btn-secondary" onclick="showNotification('Explorando características...')">
+                            Learn More
+                        </button>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        <div class="stat-card">
+                            <div class="stat-number">320M+</div>
+                            <div class="stat-label">Baseline</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">590K+</div>
+                            <div class="stat-label">Token Limit</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">68.5%</div>
+                            <div class="stat-label">Digital Growth</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Content (Decorativo) -->
+                <div class="relative z-5 hidden lg:flex justify-center items-center">
+                    <div class="relative w-full h-96">
+                        <!-- Circles decorativos -->
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-64 h-64 rounded-full border-2 border-purple-500/30 animate-pulse"></div>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-48 h-48 rounded-full border-2 border-cyan-400/30 animate-pulse" style="animation-delay: 0.5s;"></div>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-32 h-32 rounded-full bg-gradient-to-r from-purple-500 to-cyan-400 blur-2xl opacity-40"></div>
+                        </div>
+                        
+                        <!-- Texto central -->
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-center">
+                                <div class="text-6xl font-bold text-purple-400">AI</div>
+                                <div class="text-sm text-cyan-300 mt-2">Powered by NEXVIM</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="relative py-20 px-4">
+        <div class="max-w-4xl mx-auto glass p-12 rounded-2xl text-center">
+            <h2 class="text-4xl font-bold mb-6">Listo para transformar tu negocio?</h2>
+            <p class="text-gray-300 mb-8 text-lg">
+                Únete a miles de empresas que ya están innovando sin límites con NEXVIM.
+            </p>
+            <button class="btn-primary" onclick="showNotification('¡Gracias por tu interés! Nos pondremos en contacto pronto.')">
+                Iniciar Demo Gratuita
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-8 px-4">
+        <div class="max-w-7xl mx-auto text-center text-gray-400 text-sm">
+            <p>&copy; 2026 NEXVIM. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.classList.add('hide');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                showNotification(`Navegando a ${id.toUpperCase()}`);
+            }
+        }
+
+        function changeLanguage(lang) {
+            showNotification(`Idioma cambiado a: ${lang}`);
+        }
+
+        // Interactividad adicional
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                if (this.textContent !== 'Home' && this.textContent !== 'Service' && this.textContent !== 'Feature' && this.textContent !== 'Contact') {
+                    return;
+                }
+            });
+        });
+
+        // Log de inicialización
+        console.log('%c✨ NEXVIM - Innovate Without Limits ✨', 'font-size: 20px; color: #a855f7; font-weight: bold;');
+        console.log('%cApp cargada correctamente', 'color: #22d3ee; font-size: 14px;');
+    </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "hero-spa",
+  "version": "1.0.0",
+  "description": "Demo SPA replicando el hero del diseño Figma",
+  "scripts": {
+    "start": "serve -s . -l 8001",
+    "start:py": "python -m http.server 8001 --bind 127.0.0.1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {}
+}
