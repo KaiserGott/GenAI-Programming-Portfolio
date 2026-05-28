@@ -1,0 +1,14 @@
+# requirements.txt - Dependencias del proyecto seguro
+
+# Hashing seguro de contraseñas
+bcrypt>=4.0.0
+
+# Cargar variables de entorno desde archivo .env
+python-dotenv>=1.0.0
+
+# (Opcional) Validación adicional de seguridad
+email-validator>=2.0.0
+
+# (Opcional) Scanning de vulnerabilidades en dependencias
+pip-audit>=2.6.0
+

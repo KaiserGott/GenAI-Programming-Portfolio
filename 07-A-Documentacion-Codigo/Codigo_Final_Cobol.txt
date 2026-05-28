@@ -1,0 +1,142 @@
+      ******************************************************************
+      * PROGRAMA: CALCULOPAGOS
+      * PROPÓSITO: Calcular la liquidación de sueldos de empleados
+      *            (sueldo bruto, descuentos y sueldo neto)
+      * AUTOR: ALDO
+      * FECHA: 28-05-2026
+      * DESCRIPCIÓN: 
+      *   Este programa procesa información de un empleado (ID, nombre,
+      *   horas trabajadas y valor por hora) para calcular:
+      *   - Sueldo Bruto (Horas * Valor/Hora)
+      *   - Descuento (11% de retención)
+      *   - Sueldo Neto (Sueldo Bruto - Descuento)
+      *   Finalmente, imprime los resultados formateados en consola.
+      ******************************************************************
+      IDENTIFICATION DIVISION.
+       PROGRAM-ID. CALCULOPAGOS.
+       AUTHOR.     ALDO.
+       DATE-WRITTEN. 28-05-2026.
+
+      ******************************************************************
+      * ENVIRONMENT DIVISION: Configuración del ambiente de ejecución
+      ******************************************************************
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.
+       SPECIAL-NAMES.
+           DECIMAL-POINT IS COMMA.  * Utiliza coma como separador decimal
+
+      ******************************************************************
+      * DATA DIVISION: Definición de datos y variables del programa
+      ******************************************************************
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+      *
+      * ESTRUCTURA 1: DATOS DEL EMPLEADO
+      * Contiene la información de entrada del empleado a procesar
+      *
+       01  WS-EMPLEADO.
+           05  WS-ID-EMPLEADO     PIC X(5)     VALUE "E0412".
+                                                 * Identificador único del empleado
+           05  WS-NOMBRE          PIC X(20)    VALUE "JUAN PEREZ".
+                                                 * Nombre del empleado (máx 20 caracteres)
+           05  WS-HORAS-TRAB      PIC 9(3)     VALUE 160.
+                                                 * Total de horas trabajadas en el período
+           05  WS-VALOR-HORA      PIC 9(4)V99  VALUE 0015,50.
+                                                 * Tarifa horaria (con 2 decimales)
+
+      *
+      * ESTRUCTURA 2: VARIABLES DE CÁLCULO
+      * Almacenan resultados intermedios y finales de los cálculos
+      *
+       01  WS-VARIABLES-TRABAJO.
+           05  WS-SUELDO-BRUTO    PIC 9(6)V99  VALUE ZERO.
+                                                 * Resultado: Horas * Valor/Hora
+           05  WS-DESCUENTO       PIC 9(5)V99  VALUE ZERO.
+                                                 * Resultado: Sueldo Bruto * 11%
+           05  WS-SUELDO-NETO     PIC 9(6)V99  VALUE ZERO.
+                                                 * Resultado: Sueldo Bruto - Descuento
+
+      *
+      * ESTRUCTURA 3: CONSTANTES
+      * Valores fijos utilizados en cálculos
+      *
+       01  WS-CONSTANTES.
+           05  WS-PORC-DESC       PIC V99      VALUE ,11.
+                                                 * Porcentaje de retención (11%)
+
+      *
+      * ESTRUCTURA 4: LÍNEA DE SALIDA
+      * Formato de datos preparado para impresión en consola
+      *
+       01  WS-LINEA-DETALLE.
+           05  FILLER             PIC X(5)     VALUE "EMP: ".
+                                                 * Etiqueta de empleado
+           05  WS-OUT-ID          PIC X(5).
+                                                 * ID del empleado (a mostrar)
+           05  FILLER             PIC X(3)     VALUE " - ".
+                                                 * Separador
+           05  WS-OUT-NOMBRE      PIC X(20).
+                                                 * Nombre del empleado (a mostrar)
+           05  FILLER             PIC X(7)     VALUE " NETO: ".
+                                                 * Etiqueta de sueldo neto
+           05  WS-OUT-NETO        PIC $ZZZ.ZZ9,99.
+                                                 * Sueldo neto formateado con símbolo $
+
+       PROCEDURE DIVISION.
+      ******************************************************************
+      * PROCEDIMIENTO 0000-PRINCIPAL
+      * Propósito: Coordinar la ejecución principal del programa
+      * Flujo:
+      *   1. Llama a 1000-CALCULAR-SUELDO para hacer los cálculos
+      *   2. Llama a 2000-MOSTRAR-RESULTADOS para imprimir los datos
+      *   3. Termina la ejecución con STOP RUN
+      ******************************************************************
+       0000-PRINCIPAL.
+           PERFORM 1000-CALCULAR-SUELDO
+           PERFORM 2000-MOSTRAR-RESULTADOS
+           STOP RUN.
+
+      ******************************************************************
+      * PROCEDIMIENTO 1000-CALCULAR-SUELDO
+      * Propósito: Realizar los cálculos de liquidación de sueldo
+      * Cálculos realizados:
+      *   1. Sueldo Bruto = Horas Trabajadas × Valor por Hora
+      *   2. Descuento = Sueldo Bruto × 11%
+      *   3. Sueldo Neto = Sueldo Bruto - Descuento
+      * Salida: WS-SUELDO-BRUTO, WS-DESCUENTO, WS-SUELDO-NETO actualizadas
+      ******************************************************************
+       1000-CALCULAR-SUELDO.
+      * Paso 1: Calcular el sueldo bruto (horas trabajadas × tarifa)
+           MULTIPLY WS-HORAS-TRAB BY WS-VALOR-HORA 
+               GIVING WS-SUELDO-BRUTO
+           
+      * Paso 2: Calcular el descuento (11% del sueldo bruto)
+           MULTIPLY WS-SUELDO-BRUTO BY WS-PORC-DESC 
+               GIVING WS-DESCUENTO
+           
+      * Paso 3: Calcular el sueldo neto (sueldo bruto menos descuentos)
+           SUBTRACT WS-DESCUENTO FROM WS-SUELDO-BRUTO 
+               GIVING WS-SUELDO-NETO.
+
+      ******************************************************************
+      * PROCEDIMIENTO 2000-MOSTRAR-RESULTADOS
+      * Propósito: Preparar y mostrar los resultados en consola
+      * Proceso:
+      *   1. Transfiere los datos calculados a variables formateadas
+      *   2. Muestra encabezado descriptivo
+      *   3. Imprime la línea con datos del empleado y sueldo neto
+      *   4. Muestra separador final
+      * Entrada: Datos de empleado (ID, nombre) y sueldo neto calculado
+      ******************************************************************
+       2000-MOSTRAR-RESULTADOS.
+      * Paso 1: Mover datos a estructura de salida con formato
+           MOVE WS-ID-EMPLEADO TO WS-OUT-ID
+           MOVE WS-NOMBRE      TO WS-OUT-NOMBRE
+           MOVE WS-SUELDO-NETO TO WS-OUT-NETO
+           
+      * Paso 2: Mostrar encabezado
+           DISPLAY "--- PROCESAMIENTO DE LIQUIDACION ---"
+      * Paso 3: Mostrar línea con datos formateados
+           DISPLAY WS-LINEA-DETALLE
+      * Paso 4: Mostrar separador final
+           DISPLAY "------------------------------------".
